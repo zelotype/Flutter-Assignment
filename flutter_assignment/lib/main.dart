@@ -9,11 +9,12 @@ class LoginMain extends StatelessWidget{
 
     return MaterialApp(
       theme: ThemeData(
-        primaryColor: Colors.pink[200],
+        primaryColor: Colors.white,
         accentColor: Colors.yellow[300],
+        brightness: Brightness.light
       ),
       home: Scaffold(
-        backgroundColor: Colors.pink[200],
+        backgroundColor: Color.fromRGBO(255, 140, 146, 1.0),
         body: Column(
           children: [
             Container(
@@ -145,15 +146,23 @@ class LoginFormState extends State<LoginForm>{
 class Register extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MaterialApp(
+      theme: ThemeData(
+        primaryColor: Colors.black,
+        accentColor: Colors.yellow[300]
+      ),
+      home: Scaffold(
       appBar: AppBar(
         title: Text('Register'),
+          backgroundColor: Color.fromRGBO(255, 140, 146, 1.0),
       ),
-      body: Column(
-        children: <Widget>[
+      body: Container(
+        color: Colors.white30,
+        child: (
           RegisterForm()
-        ],
+        ),
       ),
+    )
     );
   }
 }
@@ -237,7 +246,7 @@ class Main extends StatelessWidget{
         appBar:
           AppBar(
             title: Center(child: Text('Home')),
-            backgroundColor: Colors.pink[200],
+            backgroundColor: Color.fromRGBO(255, 140, 146, 1.0),
           ),
         body: TabBarView(
             children: [
