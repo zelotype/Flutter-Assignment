@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
 
-void main(){
+void main() {
   runApp(LoginMain());
 }
-
-
-
-
-

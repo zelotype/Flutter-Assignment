@@ -1,15 +1,14 @@
 library flutter_assignment.register;
+
 import 'package:flutter/material.dart';
 import 'homepage.dart';
 
-class Register extends StatelessWidget{
+class Register extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
-            primaryColor: Colors.black,
-            accentColor: Colors.yellow[300]
-        ),
+            primaryColor: Colors.black, accentColor: Colors.yellow[300]),
         home: Scaffold(
           appBar: AppBar(
             title: Text('Register'),
@@ -17,16 +16,13 @@ class Register extends StatelessWidget{
           ),
           body: Container(
             color: Colors.white30,
-            child: (
-                RegisterForm()
-            ),
+            child: (RegisterForm()),
           ),
-        )
-    );
+        ));
   }
 }
 
-class RegisterForm extends StatefulWidget{
+class RegisterForm extends StatefulWidget {
   @override
   RegisterFormState createState() {
     // TODO: implement createState
@@ -34,7 +30,7 @@ class RegisterForm extends StatefulWidget{
   }
 }
 
-class RegisterFormState extends State<RegisterForm>{
+class RegisterFormState extends State<RegisterForm> {
   final _RegisKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -43,19 +39,14 @@ class RegisterFormState extends State<RegisterForm>{
       child: TextFormField(
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-              prefixIcon: Icon(Icons.email),
-              hintText: 'Kawi@gmail.com'
-          )
-      ),
+              prefixIcon: Icon(Icons.email), hintText: 'Kawi@gmail.com')),
     );
     Widget passwordRegisForm = Container(
       padding: const EdgeInsets.only(left: 32, right: 32, bottom: 5),
       child: TextFormField(
         obscureText: true,
-        decoration: InputDecoration(
-            prefixIcon: Icon(Icons.lock),
-            hintText: 'password'
-        ),
+        decoration:
+            InputDecoration(prefixIcon: Icon(Icons.lock), hintText: 'password'),
       ),
     );
     Widget registerButton = Container(
@@ -69,11 +60,10 @@ class RegisterFormState extends State<RegisterForm>{
           elevation: 4.0,
           splashColor: Colors.blueGrey,
           onPressed: () {
-            if (_RegisKey.currentState.validate()){
+            if (_RegisKey.currentState.validate()) {
               print('Register Succeed');
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Main())
-              );
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Main()));
             }
           },
         ),

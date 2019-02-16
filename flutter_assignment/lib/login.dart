@@ -4,24 +4,21 @@ import 'package:flutter/material.dart';
 import 'homepage.dart';
 import 'register.dart';
 
-class LoginMain extends StatelessWidget{
+class LoginMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       theme: ThemeData(
           primaryColor: Colors.white,
           accentColor: Colors.yellow[300],
-          brightness: Brightness.light
-      ),
+          brightness: Brightness.light),
       home: Scaffold(
         backgroundColor: Color.fromRGBO(255, 140, 146, 1.0),
         body: Column(
           children: [
             Container(
               padding: const EdgeInsets.only(top: 50),
-              child:
-              Image.asset(
+              child: Image.asset(
                 'images/login.png',
                 width: 400,
                 height: 300,
@@ -35,36 +32,32 @@ class LoginMain extends StatelessWidget{
   }
 }
 
-class LoginForm extends StatefulWidget{
+class LoginForm extends StatefulWidget {
   @override
   LoginFormState createState() {
     // TODO: implement createState
     return LoginFormState();
   }
-
 }
 
-class LoginFormState extends State<LoginForm>{
+class LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     Widget usernameField = Container(
       padding: const EdgeInsets.only(left: 32, right: 32, bottom: 5),
       child: TextFormField(
-        validator: (value){
-          if(value.isEmpty){
+        validator: (value) {
+          if (value.isEmpty) {
             return 'Please enter user id';
-          }
-          else{
-            if(value == 'admin' || value == 'Admin'){
+          } else {
+            if (value == 'admin' || value == 'Admin') {
               return 'Incorrect user id';
             }
           }
         },
         keyboardType: TextInputType.emailAddress,
-        onSaved: (value) {
-
-        },
+        onSaved: (value) {},
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.person),
           labelText: 'User id',
@@ -75,25 +68,22 @@ class LoginFormState extends State<LoginForm>{
     Widget passwordField = Container(
       padding: const EdgeInsets.only(left: 32, right: 32),
       child: TextFormField(
-        validator: (value){
-          if(value.isEmpty){
+        validator: (value) {
+          if (value.isEmpty) {
             return 'Please enter password';
-          }
-          else{
-            if(value == 'admin' || value == 'Admin'){
+          } else {
+            if (value == 'admin' || value == 'Admin') {
               return 'Incorrect password';
             }
           }
         },
         obscureText: true,
         decoration: InputDecoration(
-            prefixIcon: Icon(Icons.lock),
-            labelText: 'Password'
-        ),
+            prefixIcon: Icon(Icons.lock), labelText: 'Password'),
       ),
     );
     Widget loginButton = Container(
-      child:SizedBox(
+      child: SizedBox(
         width: 350,
         height: 50,
         child: RaisedButton(
@@ -102,11 +92,10 @@ class LoginFormState extends State<LoginForm>{
           elevation: 4.0,
           splashColor: Colors.blueGrey,
           onPressed: () {
-            if (_formKey.currentState.validate()){
+            if (_formKey.currentState.validate()) {
               print('Login Succeed');
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Main())
-              );
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Main()));
             }
           },
         ),
@@ -114,12 +103,12 @@ class LoginFormState extends State<LoginForm>{
     );
     Widget registerButton = Container(
         child: FlatButton(
-          onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Register()));
-          },
-          child: Text('Register New Account'),
-        )
-    );
+      onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Register()));
+      },
+      child: Text('Register New Account'),
+    ));
     return Form(
       key: _formKey,
       child: Column(
@@ -132,12 +121,9 @@ class LoginFormState extends State<LoginForm>{
           ),
           Container(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  registerButton
-                ],
-              )
-          ),
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [registerButton],
+          )),
         ],
       ),
     );
