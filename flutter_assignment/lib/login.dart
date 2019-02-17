@@ -42,13 +42,16 @@ class LoginForm extends StatefulWidget {
 
 class LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
-  final loginController = TextEditingController();
+
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
   String username;
   String password;
 
   void dispose(){
-    loginController.dispose();
+    usernameController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
 
@@ -57,7 +60,7 @@ class LoginFormState extends State<LoginForm> {
     Widget usernameField = Container(
       padding: const EdgeInsets.only(left: 32, right: 32, bottom: 5),
       child: TextFormField(
-          controller: loginController,
+          controller: usernameController,
           validator: (value) {
             username = value;
         },
@@ -73,11 +76,11 @@ class LoginFormState extends State<LoginForm> {
     Widget passwordField = Container(
       padding: const EdgeInsets.only(left: 32, right: 32),
       child: TextFormField(
-        controller: loginController,
-        validator: (value) {
-          password = value;
+        controller: passwordController,
+        validator: (value2) {
+          password = value2;
         },
-        obscureText: true,
+//        obscureText: true,
         decoration: InputDecoration(
             prefixIcon: Icon(Icons.lock), labelText: 'Password'),
       ),

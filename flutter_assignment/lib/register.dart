@@ -91,6 +91,10 @@ class RegisterFormState extends State<RegisterForm> {
                 Scaffold.of(context)
                     .showSnackBar(SnackBar(content: Text('user นี้มีอยู่ในระบบแล้ว')));
               }
+              else if(password_1 != password_2){
+                Scaffold.of(context)
+                    .showSnackBar(SnackBar(content: Text('password ไม่เหมือนกัน')));
+              }
               else{
                 print('Register Succeed');
                 Navigator.push(
