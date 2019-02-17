@@ -42,19 +42,24 @@ class LoginForm extends StatefulWidget {
 
 class LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
+  final loginController = TextEditingController();
+
+  String username;
+  String password;
+
+  void dispose(){
+    loginController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget usernameField = Container(
       padding: const EdgeInsets.only(left: 32, right: 32, bottom: 5),
       child: TextFormField(
-        validator: (value) {
-          if (value.isEmpty) {
-            return 'Please enter user id';
-          } else {
-            if (value == 'admin' || value == 'Admin') {
-              return 'Incorrect user id';
-            }
-          }
+          controller: loginController,
+          validator: (value) {
+            username = value;
         },
         keyboardType: TextInputType.emailAddress,
         onSaved: (value) {},
@@ -68,14 +73,9 @@ class LoginFormState extends State<LoginForm> {
     Widget passwordField = Container(
       padding: const EdgeInsets.only(left: 32, right: 32),
       child: TextFormField(
+        controller: loginController,
         validator: (value) {
-          if (value.isEmpty) {
-            return 'Please enter password';
-          } else {
-            if (value == 'admin' || value == 'Admin') {
-              return 'Incorrect password';
-            }
-          }
+          password = value;
         },
         obscureText: true,
         decoration: InputDecoration(
@@ -93,9 +93,19 @@ class LoginFormState extends State<LoginForm> {
           splashColor: Colors.blueGrey,
           onPressed: () {
             if (_formKey.currentState.validate()) {
-              print('Login Succeed');
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Main()));
+              if(password.isEmpty || username.isEmpty){
+                Scaffold.of(context)
+                    .showSnackBar(SnackBar(content: Text('กรุณาระบุ user หรือ password')));
+              }
+              else if(username == 'admin' && password == 'admin'){
+                Scaffold.of(context)
+                    .showSnackBar(SnackBar(content: Text('user or password ไม่ถูกต้อง')));
+              }
+              else{
+                print('Login Succeed');
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Main()));
+              }
             }
           },
         ),

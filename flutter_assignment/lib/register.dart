@@ -31,13 +31,21 @@ class RegisterForm extends StatefulWidget {
 }
 
 class RegisterFormState extends State<RegisterForm> {
-  final _RegisKey = GlobalKey<FormState>();
+  final _regisKey = GlobalKey<FormState>();
+
+  String email;
+  String password_1;
+  String password_2;
+
   @override
   Widget build(BuildContext context) {
     Widget emailFieldForm = Container(
       padding: const EdgeInsets.only(left: 32, right: 32, bottom: 5, top: 10),
       child: TextFormField(
           keyboardType: TextInputType.emailAddress,
+          validator: (value) {
+            email = value;
+          },
           decoration: InputDecoration(
               prefixIcon: Icon(Icons.email), hintText: 'Kawi@gmail.com')),
     );
@@ -45,8 +53,22 @@ class RegisterFormState extends State<RegisterForm> {
       padding: const EdgeInsets.only(left: 32, right: 32, bottom: 5),
       child: TextFormField(
         obscureText: true,
+        validator: (value) {
+          password_1 = value;
+        },
         decoration:
             InputDecoration(prefixIcon: Icon(Icons.lock), hintText: 'password'),
+      ),
+    );
+    Widget rePasswordRegisForm = Container(
+      padding: const EdgeInsets.only(left: 32, right: 32, bottom: 5),
+      child: TextFormField(
+        obscureText: true,
+        validator: (value) {
+          password_2 = value;
+        },
+        decoration:
+        InputDecoration(prefixIcon: Icon(Icons.lock), hintText: 'password'),
       ),
     );
     Widget registerButton = Container(
@@ -60,22 +82,32 @@ class RegisterFormState extends State<RegisterForm> {
           elevation: 4.0,
           splashColor: Colors.blueGrey,
           onPressed: () {
-            if (_RegisKey.currentState.validate()) {
-              print('Register Succeed');
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Main()));
+            if (_regisKey.currentState.validate()) {
+              if(email.isEmpty || password_1.isEmpty || password_2.isEmpty){
+                Scaffold.of(context)
+                    .showSnackBar(SnackBar(content: Text('กรุณาาระบุข้อมูลให้ครบถ้วน')));
+              }
+              else if(email == 'admin'){
+                Scaffold.of(context)
+                    .showSnackBar(SnackBar(content: Text('user นี้มีอยู่ในระบบแล้ว')));
+              }
+              else{
+                print('Register Succeed');
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => Main()));
+              }
             }
           },
         ),
       ),
     );
     return Form(
-      key: _RegisKey,
+      key: _regisKey,
       child: Column(
         children: <Widget>[
           emailFieldForm,
           passwordRegisForm,
-          passwordRegisForm,
+          rePasswordRegisForm,
           registerButton,
         ],
       ),
