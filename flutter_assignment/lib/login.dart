@@ -13,6 +13,7 @@ class LoginMain extends StatelessWidget {
           accentColor: Colors.yellow[300],
           brightness: Brightness.light),
       home: Scaffold(
+        resizeToAvoidBottomPadding: false,
         backgroundColor: Color.fromRGBO(255, 140, 146, 1.0),
         body: Column(
           children: [
@@ -134,9 +135,9 @@ class LoginFormState extends State<LoginForm> {
           ),
           Container(
               child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [registerButton],
-          )),
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [registerButton],
+              )),
         ],
       ),
     );
